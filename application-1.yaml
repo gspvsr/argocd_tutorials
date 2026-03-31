@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: application-from-stratch
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      releaseName: application-from-helm
+      valueFiles:
+        - custom-values.yaml
+    path: v03-argocd-applications/helm/nginx
+    repoURL: https://github.com/gspvsr/argocd_tutorials.git
+    targetRevision: main
